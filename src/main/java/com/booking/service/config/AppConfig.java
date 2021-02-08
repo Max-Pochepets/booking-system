@@ -4,7 +4,6 @@ import com.booking.service.model.User;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +18,11 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
         "com.booking.service.dao"
 })
 public class AppConfig {
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
+
+    public AppConfig(Environment environment) {
+        this.environment = environment;
+    }
 
     @Bean
     public DataSource getDataSource() {

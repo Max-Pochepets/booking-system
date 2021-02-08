@@ -4,6 +4,7 @@ import com.booking.service.dao.UserDao;
 import com.booking.service.lib.DataProcessException;
 import com.booking.service.model.User;
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -35,6 +36,16 @@ public class UserDaoImpl implements UserDao {
             if (session != null) {
                 session.close();
             }
+        }
+    }
+
+    @Override
+    public Optional<User> get(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            User user = session.get(User.class, id);
+            return Optional.ofNullable(user);
+        } catch (Exception e) {
+            throw new DataProcessException("Could not get user by id " + id + ". ", e);
         }
     }
 

@@ -37,23 +37,9 @@ public class UserController {
     @GetMapping("/inject")
     public String inject() {
         User[] users = new User[4];
-        String name = "";
         for (int i = 0; i < users.length; i++) {
             users[i] = new User();
-            switch (i) {
-                case 0:
-                case 3: {
-                    name += "A";
-                    break;
-                }
-                case 1:
-                case 2: {
-                    name += "B";
-                    break;
-                }
-                default: break;
-            }
-            users[i].setName(name);
+            users[i].setName("User " + i);
             userService.add(users[i]);
         }
         return "Users injected!";

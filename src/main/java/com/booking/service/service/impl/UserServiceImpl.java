@@ -4,6 +4,7 @@ import com.booking.service.dao.UserDao;
 import com.booking.service.model.User;
 import com.booking.service.service.UserService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,10 +22,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(Long id) {
-        if (userDao.get(id).isEmpty()) {
+        Optional<User> optionalUser = userDao.get(id);
+        if (optionalUser.isEmpty()) {
             return null;
         }
-        return userDao.get(id).get();
+        return optionalUser.get();
     }
 
     @Override

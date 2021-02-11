@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,6 +23,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
+    @ResponseBody
     @GetMapping("/{user_id}")
     public UserResponseDto getUser(@PathVariable("user_id") Long id) {
         return userMapper.toDto(userService.get(id));

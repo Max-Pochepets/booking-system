@@ -20,6 +20,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User get(Long id) {
+        return userDao.get(id).orElseThrow(() -> new RuntimeException("There is no user by id "
+                                                                + id + "."));
+    }
+
+    @Override
     public List<User> listUsers() {
         return userDao.listUsers();
     }
